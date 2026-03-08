@@ -97,12 +97,12 @@ nav::after {
 
 /* ── HERO ── */
 .hero {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 64px 80px;
-  padding-top: 120px;
+  padding: 0 64px 32px;
+  padding-top: 80px;
   position: relative;
   overflow: hidden;
 }
