@@ -759,8 +759,8 @@ footer {
 
   /* hero */
   .hero {
-    padding: 40px 24px 48px;
-    min-height: 100svh;
+    padding: 80px 24px 24px;
+    min-height: auto;
     justify-content: flex-start;
   }
   .hero-eyebrow { margin-bottom: 20px; }
