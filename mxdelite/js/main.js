@@ -42,11 +42,13 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   note.style.color = '';
 
   try {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('message', brief);
     await fetch(SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, brief })
+      body: formData
     });
 
     label.textContent = 'Sent.';
