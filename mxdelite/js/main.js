@@ -20,8 +20,29 @@ grain();
 
 // ── No custom cursor — default system cursor ──
 
-// ── Form submission → Google Sheet ──
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCaOlE1sfQD119yUaOM0BKXWNELfTh3pV01fT37Hl0xQvPj-IyezZdTOnKVAG0WiKG/exec';
+// ── Form submission → Supabase REST ──
+const SUPABASE_URL = 'https://nxakuzlcqolztadfklof.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54YWt1emxjW... (TRUNCATED) ...4dzec';
+const leadsEndpoint = `${SUPABASE_URL}/rest/v1/leads`;
+
+async function submitToSupabase(payload) {
+  const res = await fetch(leadsEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      Prefer: 'return=representation'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!res.ok) {
+    throw new Error(`Supabase insert failed: ${res.status} ${res.statusText}`);
+  }
+
+  return res.json();
+}
 
 document.getElementById('submit-btn').addEventListener('click', async () => {
   const name  = document.getElementById('name').value.trim();
@@ -42,14 +63,7 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   note.style.color = '';
 
   try {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('message', brief);
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: formData
-    });
+    await submitToSupabase({ name, email, brief });
 
     label.textContent = 'Sent.';
     note.textContent = 'We will be in touch within 24 hours.';
@@ -58,6 +72,7 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     document.getElementById('email').value = '';
     document.getElementById('brief').value = '';
   } catch (err) {
+    console.error(err);
     label.textContent = 'Send Message';
     document.getElementById('submit-btn').disabled = false;
     note.textContent = 'Something went wrong. Email us directly.';
