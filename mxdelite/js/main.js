@@ -22,7 +22,7 @@ grain();
 
 // ── Form submission → Supabase REST ──
 const SUPABASE_URL = 'https://nxakuzlcqolztadfklof.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54YWt1emxjW... (TRUNCATED) ...4dzec';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54YWt1emxjcW9senRhZGZrbG9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MDI3NjIsImV4cCI6MjA4OTA3ODc2Mn0.BlhjYMtdWppWN_YQ8BhKe91veYuZM06R1VTlp_4dzec';
 const leadsEndpoint = `${SUPABASE_URL}/rest/v1/leads`;
 
 async function submitToSupabase(payload) {
