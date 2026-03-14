@@ -75,7 +75,7 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     console.error(err);
     label.textContent = 'Send Message';
     document.getElementById('submit-btn').disabled = false;
-    note.textContent = 'Something went wrong. Email us directly.';
+    note.textContent = 'Something went wrong. ' + (err.message || 'Email us directly.');
     note.style.color = '#ff5555';
   }
 });
